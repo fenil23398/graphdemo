@@ -7,11 +7,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <button ion-button round color="secondary" (click)="onclickif()">M</button>
+  <button ion-button round color="secondary" (click)="onclickif()">t</button>
+  <button ion-button round color="secondary" (click)="onclickif()">w</button>
+  <button ion-button round color="secondary" (click)="onclickif()">t</button>
+  <button ion-button round color="secondary" (click)="onclickif()">f</button>
+  <button ion-button round color="secondary" (click)="onclickif()">s</button>
+  <button ion-button round color="secondary" (click)="onclickif()">s</button>
+[(ngModel)]="c";
+  {{c}};
 </ion-content>

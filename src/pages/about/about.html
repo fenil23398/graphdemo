@@ -1,11 +1,28 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Login
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  <ion-list>
+    
+      <ion-item>
+        <ion-label floating>Mail_ID</ion-label>
+        <ion-input type="text" [(ngModel)]="u_id"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="u_pass"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <button ion-button block (click)="onLogin()">Login</button>
+        <h2>Or ?</h2>
+        <button ion-button block (click)="onLSignup()">Signup</button>
+      </ion-item>
+    </ion-list>
 </ion-content>
