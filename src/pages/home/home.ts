@@ -1,36 +1,145 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Chart } from 'chart.js';
+import { mcategory } from "../../shared/mcategory";
+import { CategoryDbProvider } from "../../providers/category-db/category-db";
+import { scategory } from "../../shared/scategory";
+import { SubcatProvider } from "../../providers/subcat/subcat";
+import { exp } from "../../shared/exp";
+import { ExpdbProvider } from "../../providers/expdb/expdb";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  @ViewChild('barCanvas') barCanvas;
+  public chartLabels               : any    = [];
+  public chartValues               : any    = [];
+  arr:mcategory[]=[];
+  arr1:any[]=[];
+  arr2:exp[]=[];
+   @ViewChild('barCanvas') barCanvas;
   @ViewChild('doughnutCanvas') doughnutCanvas;
   @ViewChild('lineCanvas') lineCanvas;
   barChart: any;
   doughnutChart: any;
   lineChart :any;
   n:number=1000;
-  constructor(public navCtrl: NavController) {
+  z:number=0;
+  i:number=0;
+  sumexp:number=0;
+  j:number=0;
+  constructor(public navCtrl: NavController,public _data:CategoryDbProvider,
+  public _data1:SubcatProvider,public _data2:ExpdbProvider) {
 
   }
   ionViewDidLoad() {
-    this.barChart = this.getBarChart(); 
-    this.doughnutChart = this.getDoughnutChart();   
-    this.lineChart = this.getLineChart();
+    
+   // this.barChart = this.getBarChart(); 
+    //this.doughnutChart = this.getDoughnutChart();   
+    //this.lineChart = this.getLineChart();
+    this._data.getAllCategories().subscribe(
+      (data:mcategory[])=>{
+        this.arr=data;
+        
+      }
+      
+      
+    );
+
+    for(this.i=0;this.i<this.arr.length;this.i++){
+      this._data1.getScategoriesById(this.arr[this.i].cat_id).subscribe(
+        (data:scategory[])=>{
+          this.arr1=data;
+          //alert(this.arr1.length);
+          //console.log(data);
+        }
+        );
+      
+    }
+    let len=this.arr1.length;
+    alert(len);
+    for(this.j=0;this.j<this.arr1.length;this.j++){
+      alert('hello');
+      alert(this.arr1[this.j].sub_cat_name);
+    }
+    //this.defineChartData();
+  }
+  defineChartData()
+  {
+
+    
+   this.getValues1();
+    
+    
+       /*for(this.i=0;this.i<this.arr.length;this.i++)
+       {
+        //alert('hello');
+         this.chartLabels[this.i]=this.arr[this.i].cat_name;
+         //alert(this.chartLabels[this.i]);
+       }*/
+    
+    
+  } 
+  getValues1(){
+    //alert(this.arr.length);
+    
   }
   
+
+  /*getvalues()
+  {
+    for(this.i=0;this.i<this.arr.length;this.i++)
+    {
+   
+
+    this._data1.getScategoriesById(this.arr[this.i].cat_id).subscribe(
+      (data:scategory[])=>{
+        
+        this.arr1=data;
+        //this.sumexp=0;
+        
+        //alert(this.arr1.length);
+        for(this.z=0;this.z<this.arr1.length;this.z++)
+        {
+        this._data2.getScategoriesById(this.arr1[this.z].fk_cat_id).subscribe(
+          (data:exp[])=>{
+            
+            this.arr2=data;
+            //alert(this.arr2.length);
+            for(this.j=0;this.j<this.arr2.length;this.j++)
+            {
+             // alert(this.arr2[this.j].expense_amt);
+                this.sumexp=this.sumexp+this.arr2[this.j].expense_amt;
+                alert(this.sumexp);  
+            }
+            
+          }
+
+        );
+      }
+
+        //this.chartValues[this.z]=this.sumexp;
+       // alert(this.chartValues[this.z]);
+      }
+    );
+    }
+   /* for(this.z=0;this.z<this.arr1.length;this.z++)
+    {
+      alert(this.arr1[this.z].sub_cat_id);
+    }
+}
+
  getChart(context, chartType, data, options?) {
+  //alert(this.arr.length);
   return new Chart(context, {
 
     type: chartType,
     data: data,
     options: options
+   
   });
-}
+}*/
+/*
 getBarChart() {
  
   let data = {
@@ -125,7 +234,7 @@ getLineChart() {
 
   return this.getChart(this.lineCanvas.nativeElement, "line", data);
 }
-
+*/
 }
 
    

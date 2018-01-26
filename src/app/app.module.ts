@@ -12,6 +12,9 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginDbProvider } from '../providers/login-db/login-db';
+import { CategoryDbProvider } from '../providers/category-db/category-db';
+import { SubcatProvider } from '../providers/subcat/subcat';
+import { ExpdbProvider } from '../providers/expdb/expdb';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { LoginDbProvider } from '../providers/login-db/login-db';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    LoginDbProvider
+    LoginDbProvider,
+    CategoryDbProvider,
+    SubcatProvider,
+    ExpdbProvider
   ]
 })
 export class AppModule {}
